@@ -3,6 +3,7 @@ import pandas as pd
 import os
 import dill
 import sys
+import pickle
 
 from src.exception import CustomException
 from sklearn.model_selection import train_test_split
@@ -52,5 +53,16 @@ def evaluate_models(X_train,y_train,X_test,y_test,models,param):
     
     except Exception as e:
         raise CustomException(e,sys)
+    
+
+#used for django web application
+    
+def load_object(file_path):
+    try:
+        with open(file_path, "rb") as file_obj:
+            return pickle.load(file_obj)
+
+    except Exception as e:
+        raise CustomException(e, sys)
 
         
